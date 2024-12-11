@@ -1,13 +1,12 @@
-package com.solvd.example.web;
+package com.solvd.example.web.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SauceLoginPage {
+public class SauceLoginPage extends AbstractBasePage{
 
-    private WebDriver driver;
     @FindBy(css = "#user-name")
     private WebElement userNameInput;
     @FindBy(css = "#password")
@@ -16,7 +15,7 @@ public class SauceLoginPage {
     private WebElement loginButton;
 
     public SauceLoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

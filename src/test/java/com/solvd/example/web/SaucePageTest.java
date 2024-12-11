@@ -1,9 +1,14 @@
 package com.solvd.example.web;
 
+import com.solvd.example.web.components.ProductCard;
+import com.solvd.example.web.pages.SauceLoginPage;
+import com.solvd.example.web.pages.SauceProductsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class SaucePageTest {
     @Test
@@ -16,9 +21,11 @@ public class SaucePageTest {
         loginPage.typeUserName("standard_user");
         loginPage.typePassword("secret_sauce");
         SauceProductsPage sauceProductsPage = loginPage.clickOnLoginButton();
-        //int productsListSize = sauceProductsPage.getProductsNames().size();
-        //Assert.assertTrue(productsListSize > 0, "Products list is empty");
-        sauceProductsPage.printProductsNames();
+        List<ProductCard> productList = sauceProductsPage.getProducts();
+
+        int productsListSize = productList.size();
+        Assert.assertTrue(productsListSize > 0, "Products list is empty");
+        productList.forEach(productCard -> System.out.println(productCard.getName()));
 
         driver.close();
     }
